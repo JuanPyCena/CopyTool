@@ -68,12 +68,6 @@ class GUI:
 
     #################################################################################
 
-    def destroy(self):
-        self.app.destroy()
-        self.app = None
-
-    #################################################################################
-
     def finished_window(self):
         info(title="Bilder kopieren fertig!!", text="Alle Bilder wurden nach {destination} kopiert.".format(destination=self.dir))
 
