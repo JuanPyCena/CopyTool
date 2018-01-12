@@ -7,7 +7,8 @@ import gui
 
 from logmod import Logger
 
-DESTINATION = "/Users/SunnyMOD/Pictures/"
+# Edit DESTINATION to define your parent directory
+DESTINATION = "C:\\Users\\Felix\\Pictures\\"
 TIMEOUT     = 0
 
 def run():
@@ -22,7 +23,6 @@ def run():
     # delete logfiles that are older then one day
     if log.delete_old_logfiles():
         log.write_to_log("INFO: Old logfile removed", consoleOutput=True)
-
 
     # get connection
     if connector.get_connected():

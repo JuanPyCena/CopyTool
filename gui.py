@@ -68,7 +68,8 @@ class GUI:
     #################################################################################
 
     def finished_window(self):
-        info(title="Bilder kopieren fertig!!", text="Alle Bilder wurden nach {destination} kopiert.".format(destination=self.dir))
+        info(title="Bilder kopieren fertig!!", text="Alle Bilder wurden nach {destination} kopiert."
+                                                    "\nDas Programm wird beendet sobald der USB Stick entfernt ist".format(destination=self.dir))
 
     #################################################################################
 
