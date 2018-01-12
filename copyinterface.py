@@ -6,6 +6,7 @@ import os
 from logmod import Logger
 from shutil import copy2
 from subprocess import PIPE, Popen
+import platform
 
 class CopyInterface:
     """This class is used to create an interface between the USB devices and the PC"""
@@ -17,9 +18,15 @@ class CopyInterface:
         self.HD        = self.connector.get_HD()
 
         self.usb_directories   = None
-        self.src               = str(self.device) + "/DCIM/"
         self.destination       = destination
         self.delete_after_copy = delete_after_copy
+        self.sys               = platform.system()
+        self.WINDOWSSYSTEM     = "Windows"
+
+        if self.sys == self.WINDOWSSYSTEM:
+            self.src           = str(self.device) + "DCIM\\"
+        else:
+            self.src           = str(self.device) + "/DCIM/"
 
         self.list = self.get_list_of_files_in_src(self.src)
 
@@ -73,8 +80,8 @@ class CopyInterface:
             return True
 
         try:
-            os.mkdir(dir)
-            self.log.write_to_log("INFO: " + dir + " not found. Creating the directory to copy to")
+            self._cmdline("mkdir {dir}".format(dir=dir))
+            self.log.write_to_log("INFO: " + dir + " not found. Creating this directory to start copying")
             return True
         except:
             self.log.write_to_log("ERROR: Could not create directory " + dir)
@@ -92,15 +99,20 @@ class CopyInterface:
 
         list = []
 
-        ls = self._cmdline("ls {src}".format(src=src))
+        if self.sys == self.WINDOWSSYSTEM:
+            list = os.listdir(src)
+            print(list)
 
-        word = ""
-        for l in ls:
-            if l == "\n":
-                list.append(word)
-                word = ""
-            else:
-                word = word + l
+        else:
+            ls = self._cmdline("dir {src}".format(src=src))
+            word = ""
+            for l in ls:
+                if l == "\n":
+                    list.append(word)
+                    word = ""
+                else:
+                    word = word + l
+
 
         self.log.write_to_log("--------------------------BEGIN: LIST TO COPY--------------------------")
 
