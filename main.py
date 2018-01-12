@@ -8,7 +8,7 @@ import gui
 from logmod import Logger
 
 # Edit DESTINATION to define your parent directory
-DESTINATION = "C:\\Users\\Felix\\Pictures\\"
+DESTINATION = "Users/SunnyMOD/Pictures/"
 TIMEOUT     = 0
 
 def run():
@@ -66,12 +66,6 @@ def run():
                 dialog.finished_removing_window()
             else:
                 dialog.error_removing_window()
-
-        # Wait for the device to be disconnected again if the program does not have a timeout.
-
-        log.write_to_log("INFO: Copying done! Stop the program after "
-                         "the device {device} has been disconnected".format(device=connected_devices[0]), consoleOutput=True)
-        connector.wait_device_disconnected(device=connected_devices[0])
 
     else:
         log.write_to_log("INFO: Nothing connected.... Nothing to do ......", consoleOutput=True)
