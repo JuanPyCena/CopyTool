@@ -4,14 +4,22 @@
 import copyinterface
 import usbconnector
 import gui
+import os
+import platform
 
 from logmod import Logger
 
-# Edit DESTINATION to define your parent directory
-DESTINATION = "Users/SunnyMOD/Pictures/"
-TIMEOUT     = 0
 
 def run():
+
+    user = os.getlogin()
+    # Edit DESTINATION to define your parent directory
+    if platform.system() == "Windows":
+        DESTINATION = "C:\\Users\\{user}\\Pictures\\".format(user=user)
+    if platform.system() == "Darwin":
+        DESTINATION = "Users/{user}/Pictures/".format(user=user)
+
+    TIMEOUT = 300
 
     # start logging
     log = Logger()

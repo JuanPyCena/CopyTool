@@ -66,7 +66,6 @@ class USBConnector:
         while(True):
             self.log.write_to_log("INFO: Waiting for USB Device to be connected......")
             self.devices = self._find_devices()
-            print(self.devices)
 
             if self.devices is False:
                 self.log.write_to_log("ERROR: Exception of usbconnector._find_devices()")
