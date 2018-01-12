@@ -50,11 +50,12 @@ class USBConnector:
                 ls = self._cmdline('ls /Volumes')
                 return self._parse_devices(ls)
             elif self.sys == self.WINDOWSSYSTEM:
-                pass
+                dir = self._cmdline('fsutil fsinfo drives')
+                return self._parse_devices(dir)
 
         except:
             self.log.write_to_log("ERROR: No USB device connected")
-            return None
+            return False
 
 
     #################################################################################
@@ -66,6 +67,10 @@ class USBConnector:
             self.log.write_to_log("INFO: Waiting for USB Device to be connected......")
             self.devices = self._find_devices()
 
+            if self.devices is False:
+                self.log.write_to_log("ERROR: Exception of usbconnector._find_devices()")
+                return False
+
             now = datetime.now().timestamp()
 
             if self.timeout > 0:
@@ -73,7 +78,7 @@ class USBConnector:
                     self.log.write_to_log("ERROR: Timeout! No USB Device got connected in time")
                     return False
 
-            if len(self.devices) is not 0:
+            if self.devices:
                 return True
 
             sleep(self.wait)
@@ -117,9 +122,9 @@ class USBConnector:
         :return: the list of all usb devices
         """
         devices_path = []
-        devices      = list.splitlines()
 
         if self.sys == self.MACSYSTEM:
+            devices = list.splitlines()
             self.HD = "Macintosh HD"
             devices.remove("Macintosh HD")
             devices.remove("Preboot")
@@ -128,7 +133,17 @@ class USBConnector:
                 devices_path.append("/Volumes/" + dev)
 
         elif self.sys == self.WINDOWSSYSTEM:
-            pass
+            devices = list.split(" ")
+            self.HD = "C:\\"
+            devices.remove("C:\\")
+
+            devices = devices[1:-1]
+
+            if "D:\\" in devices:
+                devices.remove("D:\\")
+
+            for dev in devices:
+                devices_path.append(dev)
 
         return devices_path
 #EOF
