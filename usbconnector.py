@@ -142,7 +142,13 @@ class USBConnector:
             devices.remove("C:\\")
 
             devices = devices[1:-1]
-
+            
+            if "A:\\" in devices:
+                devices.remove("A:\\")
+                
+            if "B:\\" in devices:
+                devices.remove("B:\\")
+                
             if "D:\\" in devices:
                 devices.remove("D:\\")
 
