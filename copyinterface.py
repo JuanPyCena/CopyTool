@@ -101,6 +101,7 @@ class CopyInterface:
 
         if self.sys == self.WINDOWSSYSTEM:
             list = os.listdir(src)
+            print(list)
 
         else:
             ls = self._cmdline("dir {src}".format(src=src))
