@@ -20,13 +20,14 @@ def run():
         DESTINATION = "Users/{user}/Pictures/".format(user=user)
 
     TIMEOUT = 300
+    WAIT    = 1
 
     # start logging
     log = Logger()
     log.write_to_log("---------------------STARTING UP---------------------", consoleOutput=True)
 
     # create usbconnector
-    connector = USBConnector(timeout=TIMEOUT, wait=1)
+    connector = USBConnector(timeout=TIMEOUT, wait=WAIT)
 
     # delete logfiles that are older then one day
     if log.delete_old_logfiles():
