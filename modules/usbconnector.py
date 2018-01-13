@@ -7,7 +7,8 @@ import platform
 from time import sleep
 from datetime import datetime
 from subprocess import PIPE, Popen
-from logmod import Logger
+
+from modules.logmod import Logger
 
 
 class USBConnector:

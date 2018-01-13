@@ -85,7 +85,7 @@ class Logger:
         else:
             fileName = str(date.today().isoformat()) + "_" + self.hour + "h.log"
             here    = os.path.dirname(os.path.realpath(__file__))
-            subdir  = "log"
+            subdir  = "../log"
             logpath = os.path.join(here,subdir, fileName)
             if not os.path.exists(os.path.join(here,subdir)):
                 os.mkdir(os.path.join(here,subdir))

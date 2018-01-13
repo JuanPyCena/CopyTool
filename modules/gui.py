@@ -3,7 +3,8 @@
 # This module is used to create and use a small dialog window
 
 from guizero import App, Text, TextBox, CheckBox, PushButton, info, warn
-from logmod import Logger
+
+from modules.logmod import Logger
 
 class GUI:
 
@@ -69,7 +70,7 @@ class GUI:
 
     def finished_window(self):
         info(title="Bilder kopieren fertig!!", text="Alle Bilder wurden nach {destination} kopiert."
-                                                    "\nDas Programm wird beendet sobald der USB Stick entfernt ist".format(destination=self.dir))
+                                                    "\nDas Programm wird beendet sobald das Fenster geschlossen ist".format(destination=self.dir))
 
     #################################################################################
 

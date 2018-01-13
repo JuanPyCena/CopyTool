@@ -1,13 +1,13 @@
 # Felix Sonnleitner, 25.12.2017
 # Python 3.6
 
-import copyinterface
-import usbconnector
-import gui
 import os
 import platform
 
-from logmod import Logger
+from modules.copyinterface import CopyInterface
+from modules.usbconnector import USBConnector
+from modules.gui import GUI
+from modules.logmod import Logger
 
 
 def run():
@@ -26,7 +26,7 @@ def run():
     log.write_to_log("---------------------STARTING UP---------------------", consoleOutput=True)
 
     # create usbconnector
-    connector = usbconnector.USBConnector(timeout=TIMEOUT, wait=1)
+    connector = USBConnector(timeout=TIMEOUT, wait=1)
 
     # delete logfiles that are older then one day
     if log.delete_old_logfiles():
@@ -47,15 +47,15 @@ def run():
         log.write_to_log("Proceeding")
 
         # GUI for entereing the destination directory
-        dialog = gui.GUI(info=False)
+        dialog = GUI(info=False)
         destination = dialog.get_dir()
         delete_after_copying = dialog.get_delete_on_usb()
 
         # create the copy interface
-        interface = copyinterface.CopyInterface(connector=connector,
-                                                device=connected_devices[0],
-                                                destination=str(DESTINATION + destination),
-                                                delete_after_copy=delete_after_copying)
+        interface = CopyInterface(connector=connector,
+                                  device=connected_devices[0],
+                                  destination=str(DESTINATION + destination),
+                                  delete_after_copy=delete_after_copying)
 
         # copy the files to the destination given by the GUI dialog.
         # checks if the destination was defined and if it is available.

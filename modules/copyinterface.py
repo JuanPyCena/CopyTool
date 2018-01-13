@@ -3,10 +3,11 @@
 # Module used to copy files from a device to a location
 
 import os
-from logmod import Logger
 from shutil import copy2
 from subprocess import PIPE, Popen
 import platform
+
+from modules.logmod import Logger
 
 class CopyInterface:
     """This class is used to create an interface between the USB devices and the PC"""
