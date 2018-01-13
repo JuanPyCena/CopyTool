@@ -9,7 +9,7 @@ os, shutil, subprocess, guizero, datetime, time, platform
 
 
 # How to install
-* Open a shell and go to thedesired installation directory
+* Open a shell and go to the desired installation directory
 * Enter: *git clone --recursive https://github.com/JuanPyCena/CopyTool.git*
 
 ## On Mac:
