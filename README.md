@@ -9,7 +9,10 @@ os, shutil, subprocess, guizero, datetime, time, platform
 
 
 # How to install
-* Open a shell and go to the desired installation directory
+* If you do not have git installed yet you can do that here for:
+  * macOS -> [GIT for MAC](https://sourceforge.net/projects/git-osx-installer/files/latest/download)
+  * Windows -> [GIT for Windows](https://github.com/git-for-windows/git/releases/download/v2.15.1.windows.2/Git-2.15.1.2-64-bit.exe)
+* Open a shell and navigate to the desired installation directory
 * Enter: *git clone --recursive https://github.com/JuanPyCena/CopyTool.git*
 
 #### On Mac:
