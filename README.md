@@ -24,7 +24,7 @@ os, shutil, subprocess, guizero, datetime, time, platform
 * To use the copy tool you must start [CopyTool](CopyTool.py) by double clicking the file, or running the script from the console.
 * The program starts and waits for a USB device to be connected.
 * After a USB device has been connected a dialog window is shown, and you are asked to enter a directory name (**NOTE: DIALOG LANGUAGE: GERMAN**)
-  * The USB device must have a floder named _DCIM_, since this is the files structure of a digital camera. 
+  * The USB device must have a folder named _DCIM_, since this is the files structure of a digital camera. 
   Only the files from this directory will be copied.
 * The directory is created in _Pictures_ on your PC
 * It is possible to delete the files from the USB after copying the files from the USB via the dialog
