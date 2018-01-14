@@ -32,3 +32,7 @@ os, shutil, subprocess, guizero, datetime, time, platform
 * You will get another dialog window when the copying is done.
 * The pogram exits after closing all of its windows.
 * *NOTE:The program creates *log-files* in the directory *log*. This will be created in the **CopyTool** folder.*
+
+# Modification
+* Please feel free to enter modifications into the [modification](https://github.com/JuanPyCena/CopyTool/tree/public_modification_branch) branch.
+* Continuos improvement is very important to keep the software relevant.
