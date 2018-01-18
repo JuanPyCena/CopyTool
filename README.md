@@ -24,7 +24,7 @@ os, shutil, subprocess, guizero, datetime, time, platform
 * In the shell run the [installCopyToolMac.sh](installCopyToolMac.sh).
 
 #### On Windows:
-* First you must download [Python 3.6 64bit](https://www.python.org/ftp/python/3.6.0/python-3.6.0-amd64.exe). (_If your system is not 64bit you should use this link [Python 3.6 32bit](https://www.python.org/ftp/python/3.6.0/python-3.6.0.exe)_)
+* If you do not have Python installed yet, you first must download [Python 3.6 64bit](https://www.python.org/ftp/python/3.6.0/python-3.6.0-amd64.exe). (_If your system is not 64bit you should use this link [Python 3.6 32bit](https://www.python.org/ftp/python/3.6.0/python-3.6.0.exe)_)
 * After installing **Python 3.6** execute the [installRequiredPythonPackages.sh](installRequiredPythonPackages.sh) script to install all required pacakes
 
 # How to use the CopyTool
