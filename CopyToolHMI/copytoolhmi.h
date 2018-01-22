@@ -17,6 +17,11 @@ public:
 
 private:
     Ui::CopyToolHMI *ui;
+    QString m_directory;
+    bool m_remove_after_copying = false;
+
+private slots:
+    void on_ok_button_clicked();
 };
 
 #endif // COPYTOOLHMI_H
