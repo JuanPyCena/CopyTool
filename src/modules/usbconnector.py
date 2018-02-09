@@ -23,10 +23,11 @@ class USBConnector:
         """
         self.log = Logger()
 
-        self.timeout   = timeout # timeout for the get_connected function. If <= 0 there is no timeout
-        self.wait      = wait    # waiting time for the check for devices
-        self.devices   = []
-        self.HD        = None
+        self.timeout     = timeout # timeout for the get_connected function. If <= 0 there is no timeout
+        self.wait        = wait    # waiting time for the check for devices
+        self.devices     = []
+        self.prevDevices = []      # stores alls devices which were connected before the USB devices is connected
+        self.HD          = None
 
         self.sys           = platform.system()
         self.MACSYSTEM     = "Darwin"
@@ -42,22 +43,6 @@ class USBConnector:
 
     def get_HD(self):
         return self.HD
-
-    #################################################################################
-
-    def _find_devices(self):
-        try:
-            if self.sys == self.MACSYSTEM:
-                ls = self._cmdline('ls /Volumes')
-                return self._parse_devices(ls)
-            elif self.sys == self.WINDOWSSYSTEM:
-                dir = self._cmdline('fsutil fsinfo drives')
-                return self._parse_devices(dir)
-
-        except:
-            self.log.write_to_log("ERROR: No USB device connected")
-            return False
-
 
     #################################################################################
 
@@ -104,6 +89,48 @@ class USBConnector:
 
     #################################################################################
 
+    def get_prev_devices(self):
+        """
+        NOTE: This function gets the list of the already connected devices
+        """
+        devices_path = []
+
+        if self.sys == self.MACSYSTEM:
+            list = self._cmdline('ls /Volumes')
+            devices = list.splitlines()
+
+        elif self.sys == self.WINDOWSSYSTEM:
+            dir = self._cmdline('fsutil fsinfo drives')
+            devices = dir.split(" ")
+            devices = devices[1:-1]
+
+
+        self.log.write_to_log("-----------BEGIN: LIST OF AREADY CONNECTED DEVICES-----------")
+        for dev in devices:
+            self.log.write_to_log(dev, timestamp=False)
+            devices_path.append(dev)
+
+        self.log.write_to_log("------------END: LIST OF AREADY CONNECTED DEVICES------------")
+
+        self.prevDevices = devices_path
+
+    #################################################################################
+
+    def _find_devices(self):
+        try:
+            if self.sys == self.MACSYSTEM:
+                ls = self._cmdline('ls /Volumes')
+                return self._parse_devices(ls)
+            elif self.sys == self.WINDOWSSYSTEM:
+                dir = self._cmdline('fsutil fsinfo drives')
+                return self._parse_devices(dir)
+
+        except:
+            self.log.write_to_log("ERROR: No USB device connected")
+            return False
+
+    #################################################################################
+
     def _cmdline(self, command):
         """
         :param command: string
@@ -132,7 +159,9 @@ class USBConnector:
             devices = list.splitlines()
             self.HD = "Macintosh HD"
             devices.remove("Macintosh HD")
-            devices.remove("Preboot")
+            for prevDev in self.prevDevices:
+                if prevDev in devices:
+                    devices.remove(prevDev)
 
             for dev in devices:
                 devices_path.append("/Volumes/" + dev)
@@ -141,20 +170,15 @@ class USBConnector:
             devices = list.split(" ")
             self.HD = "C:\\"
             devices.remove("C:\\")
-
             devices = devices[1:-1]
-            
-            if "A:\\" in devices:
-                devices.remove("A:\\")
-                
-            if "B:\\" in devices:
-                devices.remove("B:\\")
-                
-            if "D:\\" in devices:
-                devices.remove("D:\\")
+
+            for prevDev in self.prevDevices:
+                if prevDev in devices:
+                    devices.remove(prevDev)
 
             for dev in devices:
                 devices_path.append(dev)
 
         return devices_path
+
 #EOF

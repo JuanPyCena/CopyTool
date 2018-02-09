@@ -56,7 +56,7 @@ class GUI:
             self.app.display()
 
             self.dir = dir.get()
-            self.log.write_to_log("INFO: The directory in which the files should be copied to is " + self.dir,
+            self.log.write_to_log("INFO: The directory in which the files should be copied to is: " + self.dir,
                                   consoleOutput=True)
 
             if checkbox.get_value() == 1:

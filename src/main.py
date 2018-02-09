@@ -28,6 +28,7 @@ def run():
 
     # create usbconnector
     connector = USBConnector(timeout=TIMEOUT, wait=WAIT)
+    connector.get_prev_devices()
 
     # delete logfiles that are older then one day
     if log.delete_old_logfiles():

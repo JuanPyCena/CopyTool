@@ -104,7 +104,7 @@ class CopyInterface:
             list = os.listdir(src)
 
         else:
-            ls = self._cmdline("dir {src}".format(src=src))
+            ls = self._cmdline("ls {src}".format(src=src))
             word = ""
             for l in ls:
                 if l == "\n":
